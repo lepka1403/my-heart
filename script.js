@@ -1,9 +1,11 @@
 const container = document.getElementById('heart-container');
 const textToRepeat = "I love you";
 
+// Адаптація розміру під екран мобільного
 const screenWidth = window.innerWidth;
 const isMobile = screenWidth < 600;
 
+// 13 для телефону (щоб усе влізло), 25 для комп'ютера
 const scale = isMobile ? 13 : 25; 
 const speed = 7; 
 
@@ -80,17 +82,5 @@ function animateText(index) {
     setTimeout(() => animateText(index + 1), speed);
 }
 
-/* ЛОГІКА КЛІКУ СЮРПРИЗУ */
-document.getElementById('start-btn').addEventListener('click', () => {
-    const music = document.getElementById('bg-music');
-    music.play().catch(e => console.log("Музика активна"));
-
-    const startScreen = document.getElementById('start-screen');
-    startScreen.style.opacity = '0';
-    
-    setTimeout(() => {
-        startScreen.style.display = 'none';
-        container.style.display = 'block';
-        animateText(0);
-    }, 1000);
-});
+// Запускаємо магію автоматично при завантаженні сторінки!
+animateText(0);
