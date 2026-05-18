@@ -1,19 +1,15 @@
 const container = document.getElementById('heart-container');
 const textToRepeat = "I love you";
 
-// --- АДАПТАЦІЯ ПІД ЕКРАН ТЕЛЕФОНУ ---
 const screenWidth = window.innerWidth;
 const isMobile = screenWidth < 600;
 
-// Масштаб: 13 для телефону, щоб усе влізло, 25 для комп'ютера
 const scale = isMobile ? 13 : 25; 
-
-// Швидкість появи (твоя улюблена — супердинамічна)
 const speed = 7; 
 
 let points = [];
 
-/* 1. ГЕНЕРУЄМО НЕОНОВИЙ КОНТУР (ЗАЛИШАЄТЬСЯ ІДЕАЛЬНИМ) */
+/* 1. ГЕНЕРУЄМО НЕОНОВИЙ КОНТУР */
 const contourSteps = 90; 
 for (let i = 0; i < contourSteps; i++) {
     const t = (i / contourSteps) * 2 * Math.PI;
@@ -27,32 +23,25 @@ for (let i = 0; i < contourSteps; i++) {
     });
 }
 
-/* 2. НОВИЙ АЛГОРИТМ: ГУСТИЙ ХАОС ВСЕРЕДИНІ БЕЗ ЛІНІЙ ПО ЦЕНТРУ */
-// Задаємо точну кількість слів для внутрішнього заповнення
+/* 2. РІВНОМІРНИЙ ГУСТИЙ ХАОС ВСЕРЕДИНІ */
 const targetInsidePoints = isMobile ? 280 : 450; 
 let attempts = 0;
 
-// Генеруємо точки абсолютно випадково в межах квадрата, але залишаємо тільки ті, що всередині серця
 while (points.length < (targetInsidePoints + contourSteps) && attempts < 20000) {
     attempts++;
     
-    // Випадкові координати від -1.5 до 1.5
     const tx = (Math.random() * 3) - 1.5;
     const ty = (Math.random() * 3) - 1.5;
     
-    // Перевірка за класичною формулою серця (без прив'язки до кутів, що прибирає лінію по центру)
     if (Math.pow(tx * tx + ty * ty - 1, 3) - tx * tx * ty * ty * ty < 0) {
-        
-        const posX = tx * scale * 0.92; // 0.92 робить легкий відступ, щоб не перекривати контур
+        const posX = tx * scale * 0.92; 
         const posY = -ty * scale * 0.92;
         
-        // Перевіряємо відстань між словами, щоб вони не злипалися в одну точку
         let tooClose = false;
         for (let p of points) {
             if (!p.isContour) {
                 const dx = posX - p.x;
                 const dy = posY - p.y;
-                // Задаємо комфортні проміжки для читабельності
                 if (Math.abs(dx) < 26 && Math.abs(dy) < 13) {
                     tooClose = true;
                     break;
@@ -66,7 +55,6 @@ while (points.length < (targetInsidePoints + contourSteps) && attempts < 20000) 
     }
 }
 
-// Ретельно перемішуємо, щоб контур і середина з'являлися одночасно
 points.sort(() => Math.random() - 0.5);
 
 const centerX = window.innerWidth / 2;
@@ -95,7 +83,7 @@ function animateText(index) {
 /* ЛОГІКА КЛІКУ СЮРПРИЗУ */
 document.getElementById('start-btn').addEventListener('click', () => {
     const music = document.getElementById('bg-music');
-    music.play().catch(e => console.log("Музика активована"));
+    music.play().catch(e => console.log("Музика активна"));
 
     const startScreen = document.getElementById('start-screen');
     startScreen.style.opacity = '0';
