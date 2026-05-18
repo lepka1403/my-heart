@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght=700&display=swap');
+/* Робимо фон чорним і підключаємо шрифт */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
 body {
     background-color: black;
@@ -10,40 +11,6 @@ body {
     align-items: center;
     height: 100vh;
     font-family: 'Dancing Script', cursive;
-}
-
-/* Стиль початкового екрану */
-#start-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #050505;
-    z-index: 10;
-    transition: opacity 1s ease;
-}
-
-/* Гарна неонова кнопка */
-#start-btn {
-    background: none;
-    border: 2px solid #ff1a1a;
-    color: white;
-    padding: 15px 30px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 24px;
-    cursor: pointer;
-    border-radius: 25px;
-    box-shadow: 0 0 10px rgba(255, 26, 26, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#start-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #ff1a1a, 0 0 30px #ff1a1a;
 }
 
 #heart-container {
@@ -63,11 +30,13 @@ body {
     animation: fadeIn 0.4s ease-out forwards;
 }
 
-/* Неоновий контур */
+/* Особливий клас для слів НА КОНТУРІ — вони світяться набагато яскравіше! */
 .contour-glow {
     color: #ffffff !important;
+    /* Робимо текст контуру світлішим для неонового ефекту */
     text-shadow: 0 0 8px #ff0000, 0 0 15px #ff0000, 0 0 25px #ff0000 !important;
     font-size: 14px;
+    /* Контурні слова робимо крапельку більшими */
     z-index: 5;
 }
 
