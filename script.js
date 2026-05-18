@@ -2,8 +2,8 @@ const container = document.getElementById('heart-container');
 const textToRepeat = "I love you";
 
 // --- НАЛАШТУВАННЯ ЧАСУ ТА РОЗМІРУ ---
-const scale = window.innerWidth < 600 ? Math.min(window.innerWidth / 30, window.innerHeight / 30) : 25;
-const speed = 7;        // Довша анімація! Написи з'являтимуться плавно і неспішно
+const scale = Math.min(window.innerWidth / 30, window.innerHeight / 30, 25);
+const speed = window.innerWidth < 600 ? 2 : 7;
 
 let points = [];
 
@@ -45,6 +45,8 @@ for (let r = 0.08; r < 0.94; r += 0.04) {
         });
     }
 }
+
+
 
 // Перемішуємо масив тричі для абсолютного хаосу появи
 points.sort(() => Math.random() - 0.5);
