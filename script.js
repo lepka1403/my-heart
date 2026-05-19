@@ -1,13 +1,13 @@
 const container = document.getElementById('heart-container');
 const textToRepeat = "I love you";
 
-// --- НАЛАШТУВАННЯ ЧАСУ ТА РОЗМІРУ ---
+//настройки часу і розміру
 const scale = Math.min(window.innerWidth / 30, window.innerHeight / 30, 25);
 const speed = window.innerWidth < 600 ? 2 : 7;
 
 let points = [];
 
-/* 1. НАДНАДІЙНИЙ КОНТУР (ЗАЛИШАЄТЬСЯ ІДЕАЛЬНИМ) */
+//контур
 const contourSteps = 90; 
 for (let i = 0; i < contourSteps; i++) {
     const t = (i / contourSteps) * 2 * Math.PI;
@@ -21,11 +21,8 @@ for (let i = 0; i < contourSteps; i++) {
     });
 }
 
-/* 2. НОВЕ СУПЕР-ГУСТЕ ХАОТИЧНЕ ЗАПОВНЕННЯ СЕРЕДИНИ */
-// Робимо дуже багато дрібних шарів (крок всього 0.04), щоб забити кожен міліметр всередині
 for (let r = 0.08; r < 0.94; r += 0.04) {
     
-    // Створюємо багато точок на кожному внутрішньому рівні
     const numSteps = Math.floor(65 * r); 
     
     for (let i = 0; i < numSteps; i++) {
@@ -34,7 +31,6 @@ for (let r = 0.08; r < 0.94; r += 0.04) {
         const x = 16 * Math.pow(Math.sin(t), 3);
         const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
         
-        // Зміщення для створення чистого, нелінійного хаосу
         const randomShiftX = (Math.random() * 26) - 13;
         const randomShiftY = (Math.random() * 12) - 6;
         
@@ -48,15 +44,14 @@ for (let r = 0.08; r < 0.94; r += 0.04) {
 
 
 
-// Перемішуємо масив тричі для абсолютного хаосу появи
 points.sort(() => Math.random() - 0.5);
 points.sort(() => Math.random() - 0.5);
 
-// Координати центру екрана
+//координати єкрана
 const centerX = window.innerWidth / 2;
 const centerY = window.innerHeight / 2;
 
-/* 3. ФУНКЦІЯ АНІМАЦІЇ */
+//анімація
 function animateText(index) {
     if (index >= points.length) return;
 
@@ -76,9 +71,7 @@ function animateText(index) {
     
     container.appendChild(span);
 
-    // Перехід до наступного слова з новою тривалою затримкою
     setTimeout(() => animateText(index + 1), speed);
 }
 
-// Запуск магії
 animateText(0);
